@@ -11,7 +11,7 @@ def plot_pic_mean_median(data1,data2,data3,title,xlabel,ylabel,ylim = None):
     plt.figure(figsize=(6, 4))
     plt.plot(ee, data1, marker='s', linestyle='--', color = "#7B1FA2", markeredgecolor='#5989a5', markerfacecolor='none', markeredgewidth=2, label="CVX. ADMM", linewidth=2, zorder=3)
     plt.plot(ee, data2, marker='o', linestyle='-.', color = "#103778", markeredgecolor='#512DA8', markerfacecolor='none', markeredgewidth=2, label="NCVX. ADMM", linewidth=2, zorder=3)
-    plt.plot(ee, data3, marker='*', linestyle='-', color = "#009688", markeredgecolor='#00796B', markerfacecolor='none', markeredgewidth=2, markersize=10, label="MM (prop.)", linewidth=2, zorder=3)
+    plt.plot(ee, data3, marker='*', linestyle='-', color = "#009688", markeredgecolor='#00796B', markerfacecolor='none', markeredgewidth=2, markersize=10, label="MM", linewidth=2, zorder=3)
     # TODO plt.grid(axis='y')
     plt.grid(True)
 

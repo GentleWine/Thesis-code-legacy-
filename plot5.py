@@ -1,4 +1,4 @@
-#### stopping criterion
+#### stopping criterion * iterations
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -21,6 +21,9 @@ crit_hist = np.load("record/criterion/crit_hist.npy")
 
 y = crit_hist[0]
 x = np.arange(1, 1001)
+
+# plot the product of criterion and iterations
+y = y * x
 
 # shape of the marker
 # m = 'p'
@@ -68,21 +71,21 @@ plt.gca().spines['bottom'].set_position(('data', 0))
 
 # Add titles and labels
 plt.xlabel(r'$t$', fontsize=28)
-plt.ylabel(r'$\omega^{t}$', fontsize=28, labelpad=-10)
+plt.ylabel(r'$\omega_{t}\times t$', fontsize=28, labelpad=0)
 
 # Add a legend
 # plt.legend()
 
 # Customize the ticks
-xticks = np.arange(0, 1010, 200)
+xticks = np.arange(0, 1010, 100)
 xticks = xticks[1:]
 plt.xlim(0, 1008)
-plt.ylim(0, 14)
+plt.ylim(0, 20)
 
 plt.gca().set_xticks(xticks)
-plt.yticks(np.arange(0, 15, 3))
+plt.yticks(np.arange(0, 50, 6))
 
-plt.tick_params(axis='both', which='major', labelsize=22)
+plt.tick_params(axis='both', which='major', labelsize=20)
 plt.tight_layout()
 
 start_x, start_y = x[0], y[0]
@@ -92,4 +95,4 @@ start_x, start_y = x[0], y[0]
 end_x, end_y = x[-1], y[-1]
 # TODO annotate
 # plt.annotate(f'({int(end_x)}, {end_y:.1f})', xy=(end_x, end_y), xytext=(end_x - 15, end_y + 1), fontsize=22)
-plt.savefig("record/criterion/result.eps", format='eps')
+plt.savefig("record/criterion/result(prod).eps", format='eps')

@@ -363,7 +363,7 @@ def crit_conv():
     # step3: solving by ADMM
     # best lambda=0.1, tau=0.5, rho=1e-5, beta=5
 
-    _, _, crit_hist = mm(Sigma_h, 1, 0.5005, 3.625, k, 20, 1, 100, crit=True)
+    _, _, crit_hist = mm(Sigma_h, 1, 0.5005, 3.625, k, 20, 1, 1000, crit=True)
 
     np.save("record/criterion/crit_hist.npy", crit_hist)
 
@@ -612,7 +612,7 @@ if __name__ == "__main__":
     # error_exp(5, "Gu", 11, 20, 100, 60, "results", {"tau": 20,  "rho": 9, "alpha": 3.625, "lamb": 0.5005, "iter": 100}, H_SNR=False)
 
     # MM
-    error_exp(5, "mm", 1, 10, 100, 60, "results", {"scale": 1, "rho": 20, "alpha": 3.625, "lamb": 0.5005, "outer": 5, "inner": 20}, H_SNR=False)
+    # error_exp(5, "mm", 1, 10, 100, 60, "results", {"scale": 1, "rho": 20, "alpha": 3.625, "lamb": 0.5005, "outer": 5, "inner": 20}, H_SNR=False)
     # error_exp(5, "mm", 2, 10, 100, 60, "results", {"scale": 1, "rho": 20, "alpha": 3.625, "lamb": 0.5005, "outer": 5, "inner": 20}, H_SNR=False)
     # error_exp(5, "mm", 3, 20, 100, 60, "results", {"scale": 1, "rho": 20, "alpha": 3.625, "lamb": 0.5005, "outer": 5, "inner": 20}, H_SNR=False)
     # error_exp(5, "mm", 4, 20, 100, 60, "results", {"scale": 1, "rho": 20, "alpha": 3.625, "lamb": 0.5005, "outer": 5, "inner": 20}, H_SNR=False)
@@ -638,4 +638,5 @@ if __name__ == "__main__":
     # error_exp(5, "l1", 11, 20, 100, 60, "results", {"tau": 20,  "rho": 9, "alpha": 3.625, "lamb": 0.5005, "iter": 100}, H_SNR=False)
 
     ###### experiment setting 6
-    contraction()
+    # contraction()
+    crit_conv()
