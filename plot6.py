@@ -35,12 +35,11 @@ def gen_cluster_orth_mat(p, s, k, seed=0):
     return U3, supp
 
 
-p = 30
-s = 10
-k = 5
+p = 10
+s = 4
+k = 2
 val = 2
 U, _ = gen_cluster_orth_mat(p, s, k, 0)
-Pi = U[:,:k] @ U[:,:k].T
 
 spike = False
 if spike:
@@ -56,8 +55,9 @@ for i in range(k):
 
 E = np.diag(es)
 Sigma = U @ E @ U.T
-
-def plot_custom_heatmap(data_matrix):
+signal_part = U[:,:k] @ E[:k, :k] @ U[:,:k].T
+nonsignal_part = U[:,k:] @ E[k:, k:] @ U[:,k:].T
+def plot_custom_heatmap(data_matrix, save_pth):
     """
     根据输入矩阵绘制热力图，样式：红蓝双色，无标签刻度，有颜色条。
     """
@@ -93,13 +93,23 @@ def plot_custom_heatmap(data_matrix):
 
     # 调整颜色条的标签大小，使其更美观
     cbar = ax.collections[0].colorbar
-    cbar.ax.tick_params(labelsize=14)
+    cbar.ax.tick_params(labelsize=30)
 
     plt.tight_layout()
-    if spike:
-        plt.savefig("record/heatmap/spike_cov_heatmap.eps", format='eps')
-    else:
-        plt.savefig("record/heatmap/non-spike_cov_heatmap.eps", format='eps')
+    plt.savefig(save_pth, format='eps')
 
 # 2. 调用函数绘图
-plot_custom_heatmap(Sigma)
+if spike:
+    cov_save_pth = "record/heatmap/spike_cov_heatmap.eps"
+    plot_custom_heatmap(Sigma, cov_save_pth)
+    signal_save_pth = "record/heatmap/spike_signal_heatmap.eps"
+    plot_custom_heatmap(signal_part, signal_save_pth)
+    nonsignal_save_pth = "record/heatmap/spike_nonsignal_heatmap.eps"
+    plot_custom_heatmap(nonsignal_part, nonsignal_save_pth)
+else:
+    cov_save_pth = f"record/heatmap/non-spike_cov_heatmap_p={p}_s={s}_k={k}.eps"
+    plot_custom_heatmap(Sigma, cov_save_pth)
+    signal_save_pth = f"record/heatmap/spike_signal_heatmap_p={p}_s={s}_k={k}.eps"
+    plot_custom_heatmap(signal_part, signal_save_pth)
+    nonsignal_save_pth = f"record/heatmap/spike_nonsignal_heatmap_p={p}_s={s}_k={k}.eps"
+    plot_custom_heatmap(nonsignal_part, nonsignal_save_pth)
