@@ -109,7 +109,7 @@ if spike:
 else:
     cov_save_pth = f"record/heatmap/non-spike_cov_heatmap_p={p}_s={s}_k={k}.eps"
     plot_custom_heatmap(Sigma, cov_save_pth)
-    signal_save_pth = f"record/heatmap/spike_signal_heatmap_p={p}_s={s}_k={k}.eps"
+    signal_save_pth = f"record/heatmap/non-spike_signal_heatmap_p={p}_s={s}_k={k}.eps"
     plot_custom_heatmap(signal_part, signal_save_pth)
-    nonsignal_save_pth = f"record/heatmap/spike_nonsignal_heatmap_p={p}_s={s}_k={k}.eps"
+    nonsignal_save_pth = f"record/heatmap/non-spike_nonsignal_heatmap_p={p}_s={s}_k={k}.eps"
     plot_custom_heatmap(nonsignal_part, nonsignal_save_pth)
